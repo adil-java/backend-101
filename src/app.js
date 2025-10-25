@@ -15,6 +15,10 @@ credentials: true,
 }));
 app.use(express.urlencoded({ extended: true, limit: '50kb' }));
 app.use(express.static('public'));
- 
+
+import userRouter from "./routers/user.router.js"
+
+app.use("/api/v1/users",userRouter)
+
 
 export {app}
