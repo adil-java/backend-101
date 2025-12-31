@@ -172,4 +172,4 @@ const logoutUser = asyncHandler(async (req, res) => {
     .json(new ApiResponse(200, {}, "User Logged Out"));
 });
 
-export { registerUser ,loginUser,logoutUser,refreshAccessToken};
+export {registerUser ,loginUser,logoutUser,refreshAccessToken};
