@@ -226,6 +226,19 @@ const updateInfo = asyncHandler(async (req, res) => {
 
   return res.status(200).json(200, user, "Account details update successfully");
 });
+const updateAvatar = asyncHandler(async (req, res) => {
+  const { avatar } = req.body;
+  const user = req.body?._id;
+  User.updateOne(
+    user,
+    {
+      $set: {
+        avatar: avatar,
+      },
+    },
+    { new: true }
+  );
+});
 export {
   registerUser,
   loginUser,
@@ -234,4 +247,5 @@ export {
   changeCurrentPassword,
   getCurrentUser,
   updateInfo,
+  updateAvatar,
 };
