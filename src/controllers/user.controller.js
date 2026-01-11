@@ -227,17 +227,28 @@ const updateInfo = asyncHandler(async (req, res) => {
   return res.status(200).json(200, user, "Account details update successfully");
 });
 const updateAvatar = asyncHandler(async (req, res) => {
-  const { avatar } = req.body;
-  const user = req.body?._id;
-  User.updateOne(
-    user,
+  const user = req.user?._id;
+  if (!user) {
+    throw new ApiError(404, "User not found");
+  }
+  const avatarLocal = req.files?.avatar?.[0]?.path;
+  if (!avatarLocal) {
+    throw new ApiError(401, "Avatar is required");
+  }
+  const avatarUrl = await uploadCloudinaryImage(avatarLocal);
+  if (!avatarUrl) {
+    throw new ApiError(401, "Avatar upload failed");
+  }
+  await User.updateOne(
+    { _id: user },
     {
       $set: {
-        avatar: avatar,
+        avatar: avatarUrl,
       },
-    },
-    { new: true }
+    }
   );
+
+  return res.status(200).json(200, avatarUrl, " Avatar update successfully");
 });
 export {
   registerUser,

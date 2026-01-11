@@ -23,6 +23,10 @@ UserRouter.route("/login").post(loginUser);
 UserRouter.route("/logout").post(verifyJwt, logoutUser);
 UserRouter.route("/refresh-Token").post(refreshAccessToken);
 UserRouter.route("/changePassword").post(verifyJwt, changeCurrentPassword);
-UserRouter.route("/updateAvatar").post(verifyJwt, updateAvatar);
+UserRouter.route("/updateAvatar").post(
+  upload.fields([]),
+  verifyJwt,
+  updateAvatar
+);
 
 export default UserRouter;
