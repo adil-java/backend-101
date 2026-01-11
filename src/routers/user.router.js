@@ -24,7 +24,12 @@ UserRouter.route("/logout").post(verifyJwt, logoutUser);
 UserRouter.route("/refresh-Token").post(refreshAccessToken);
 UserRouter.route("/changePassword").post(verifyJwt, changeCurrentPassword);
 UserRouter.route("/updateAvatar").post(
-  upload.fields([]),
+  upload.fields([
+    {
+      name: "avatar",
+      maxCount: 1,
+    },
+  ]),
   verifyJwt,
   updateAvatar
 );

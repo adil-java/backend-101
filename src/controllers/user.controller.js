@@ -243,12 +243,11 @@ const updateAvatar = asyncHandler(async (req, res) => {
     { _id: user },
     {
       $set: {
-        avatar: avatarUrl,
+        avatar: avatarUrl.url,
       },
     }
   );
-
-  return res.status(200).json(200, avatarUrl, " Avatar update successfully");
+  return res.json(200, avatarUrl, " Avatar update successfully");
 });
 export {
   registerUser,
