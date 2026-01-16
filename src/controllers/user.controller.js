@@ -249,7 +249,9 @@ const updateAvatar = asyncHandler(async (req, res) => {
   );
   return res.json(200, avatarUrl, " Avatar update successfully");
 });
+const updateCoverImg = asyncHandler(async (req, res) => {});
 export {
+  updateCoverImg,
   registerUser,
   loginUser,
   logoutUser,
